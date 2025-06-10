@@ -11,3 +11,4 @@ class Solution(object):
                 l.append(j)
         if target in l:
             return True
+        return False
