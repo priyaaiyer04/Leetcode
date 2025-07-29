@@ -4,4 +4,4 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[List[int]]
         """
-        return permutations(nums,len(nums))
+        return list( permutations(nums,len(nums)))
