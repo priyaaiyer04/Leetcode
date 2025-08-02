@@ -4,28 +4,24 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        MOD = 10**9 + 7
-        n = len(nums)
-        nums.sort()  # Sort to help with early pruning
-        memo = {}
-
-        def helper(used_tuple, last):
-            key = (used_tuple, last)
+        n=len(nums)
+        memo={}
+        nums.sort()
+        def helper(used, path):
+            key=(tuple(used),path[-1] if path else None)
             if key in memo:
                 return memo[key]
-            if sum(used_tuple) == n:
+            if len(path)==n:
                 return 1
-
-            total = 0
+            count=0
             for i in range(n):
-                if not used_tuple[i]:
-                    if last == -1 or nums[i] % nums[last] == 0 or nums[last] % nums[i] == 0:
-                        new_used = list(used_tuple)
-                        new_used[i] = 1
-                        total += helper(tuple(new_used), i)
-                        total %= MOD
-
-            memo[key] = total
-            return total
-
-        return helper(tuple([0]*n), -1)
+                if not used[i]:
+                    if len(path)==0 or nums[i]%path[-1]==0 or path[-1]%nums[i]==0:
+                        path.append(nums[i])
+                        used[i]=True
+                        count+=helper(used,path)
+                        path.pop()
+                        used[i]=False
+            memo[key]=count
+            return count%(10**9+7)
+        return helper([False]*n,[])    
