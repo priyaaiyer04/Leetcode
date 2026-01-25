@@ -4,16 +4,12 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        l=[]
-        l.append(nums[0])
-        for i in nums:
-            if l.count(i)==0:
-                l.append(i)
-        while nums:
-            nums.pop()
-        for i in l:
-            nums.append(i)
-        k=len(nums)
-        return k
-        
-            
+        x=len(nums)-1
+        k=0
+        while x>0:
+            if nums[x]==nums[x-1]:
+                nums.remove(nums[x-1])
+                k+=1
+            x-=1
+        print(nums)
+        return len(nums)                
