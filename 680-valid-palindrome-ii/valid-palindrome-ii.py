@@ -4,27 +4,22 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        i=0
-        l=[]
-        x=0
         if s==s[::-1]:
             return True
-        if len(s)==2:
-            return True
-        for i in s:
-                    l.append(i)
-        i=0
-        for i in range(len(l)//2):
-            if l[i]!=l[len(s)-i-1]:
-                x=l.pop(len(l)-i-1)
-                if l==l[::-1]:
-                    return (True)
-                    break
+        l=0
+        r=len(s)-1
+        c=0
+        while l<r:
+            print(l,r)
+            if s[l]==s[r]:
+                l+=1
+                r-=1
+            else:
+                s1=s[0:l]+s[l+1:]
+                if s1==s1[::-1]:
+                    return True
+                s1=s[0:r]+s[r+1:]
+                if s1==s1[::-1]:
+                    return True
                 else:
-                    l.insert(len(l)-i,x)
-                    x=l.pop(i)
-                    if l==l[::-1]:
-                        return (True)
-                    
-            
-                return False          
+                    return False
