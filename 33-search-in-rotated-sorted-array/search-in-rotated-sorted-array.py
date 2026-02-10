@@ -5,6 +5,23 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
-        if target not in nums:
-            return -1
-        return nums.index(target)
+        l=0
+        u=len(nums)-1
+        while l<=u:
+            m=(l+u)//2
+            if nums[m]==target:
+                return m
+            """check if left portion sorted"""
+            if nums[l]<=nums[m]:
+                if nums[l]<=target<=nums[m]:
+                    u=m-1
+                else:
+                    l=m+1
+            """check if right portion sorted"""
+            if nums[m]<=nums[u]:
+                if nums[m]<=target<=nums[u]:
+                    l=m+1
+                else:
+                    u=m-1
+
+        return -1
