@@ -14,7 +14,7 @@ class Solution(object):
             if m*m==x:
                 
                 return m
-                break
+                
             elif m*m>x:
                 u=m-1
             elif m*m<x:
