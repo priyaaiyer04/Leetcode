@@ -6,12 +6,16 @@ class Solution(object):
         :rtype: List[int]
         """
         l=[]
-        for i in range(len(nums1)):
-            j=nums2.index(nums1[i])
-            for k in range(j,len(nums2)):
-                if nums2[k]>nums2[j]:
-                    l.append(nums2[k])
-                    break
+        ans=[]
+        d={}
+        for i in nums2:
+            while len(l)>0 and i>l[-1]:
+                d[l[-1]]=i
+                l.pop()
+            l.append(i)
+        for i in nums1:
+            if i in d.keys():
+                ans.append(d[i])
             else:
-                l.append(-1)
-        return l
+                ans.append(-1)
+        return ans
