@@ -3,12 +3,18 @@ class MinStack(object):
     def __init__(self):
         self.stack=[]
 
+
     def push(self, val):
         """
         :type val: int
         :rtype: None
         """
-        self.stack.append(val)
+        min1=val
+        if len(self.stack)>0 and self.stack[-1][1]<val:
+            min1=self.stack[-1][1]
+        self.stack.append([val,min1])
+        
+
 
     def pop(self):
         """
@@ -20,13 +26,13 @@ class MinStack(object):
         """
         :rtype: int
         """
-        return self.stack[-1]
+        return self.stack[-1][0]
 
     def getMin(self):
         """
         :rtype: int
         """
-        return min(self.stack)
+        return self.stack[-1][1]
 
 
 # Your MinStack object will be instantiated and called as such:
