@@ -4,14 +4,18 @@ class Solution(object):
         :type heights: List[int]
         :rtype: int
         """
-        s=[]
+        stack=[]
         heights.append(0)
         maxarea=0
-        h=0
         for i in range(len(heights)):
-            while s and heights[i]<heights[s[-1]]:
-                h=heights[s.pop()]
-                w=i if not s else i-s[-1]-1
-                maxarea=max(maxarea,h*w)
-            s.append(i)
+            while len(stack)>0 and heights[stack[-1]]>heights[i]:
+                x=stack.pop()
+                if len(stack)>0:
+                    w=i-stack[-1]-1
+                    h=heights[x]
+                    maxarea=max(w*h,maxarea)
+                else:
+                    h=heights[x]
+                    maxarea=max(i*h,maxarea)
+            stack.append(i)
         return maxarea
