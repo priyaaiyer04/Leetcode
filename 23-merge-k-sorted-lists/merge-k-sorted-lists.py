@@ -6,23 +6,27 @@
 class Solution(object):
     def mergeKLists(self, lists):
         """
-        :type lists: List[ListNode]
-        :rtype: ListNode
+        :type lists: List[Optional[ListNode]]
+        :rtype: Optional[ListNode]
         """
-        l1=[]
-        for i in lists:
-            j=i
-            while j:
-                l1.append(j.val)
-                j=j.next
-        l1.sort()
-        t=ListNode()
-        z=t
-        c=0
-        while c<len(l1):
-            t1=ListNode()
-            t1.val=l1[c]
-            t.next=t1
-            t=t1
-            c+=1
-        return z.next
+        heap=[]
+        current=None
+        head=None
+        for i in range(len(lists)):
+            if lists[i]:
+                heapq.heappush(heap,(lists[i].val,lists[i]))
+            
+        while heap:
+            val,node=heapq.heappop(heap)
+            if current is None:
+                current=node
+                head=current
+            else:
+                current.next=node
+                current=node
+            if node.next:
+                heapq.heappush(heap,(node.next.val, node.next))
+
+        return head
+
+                
