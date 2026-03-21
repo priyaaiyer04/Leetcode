@@ -14,7 +14,7 @@ class Solution(object):
             else:
                 d[i]+=1  
         print(d)
-        for i in s:
-            if d[i]==1:
-                return s.index(i)
+        for i in range(len(s)):
+            if d[s[i]]==1:
+                return i
         return -1
