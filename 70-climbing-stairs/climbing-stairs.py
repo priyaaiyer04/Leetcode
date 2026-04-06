@@ -1,15 +1,16 @@
 class Solution(object):
-    d={}
     def climbStairs(self, n):
         """
         :type n: int
         :rtype: int
         """
-       
-        if n==1 or n==2:
-            return n
-        elif n in self.d:
-            return self.d[n]
-        else:
-            self.d[n]= self.climbStairs( n-1)+self.climbStairs( n-2)
-        return self.d[n]
+        d={}
+        def c(n):
+            if n==1 or n==2:
+                return n
+            if n in d:
+                return d[n]
+            else:
+                d[n]= c(n-1)+c(n-2)
+                return d[n]
+        return c(n)
