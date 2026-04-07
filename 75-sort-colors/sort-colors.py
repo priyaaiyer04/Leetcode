@@ -4,16 +4,23 @@ class Solution(object):
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
         """
-        if len(nums)==1 or len(nums)==0:
-            return nums
-        x=min(nums)
-        y=max(nums)
-        count=[0]*(y-x+1)
-        for i in nums:
-            count[i-x]+=1
-        k=0
-        for i in range(len(count)):
-            for j in range(count[i]):
-                nums[k]=i+x
-                k+=1
-        return nums
+        i=0
+        c=0
+        while i<len(nums):
+            if nums[i]==0:
+                c+=1
+            i+=1
+        for i in range(c):
+            nums.remove(0)
+        for i in range(c):
+            nums.insert(0,0)
+        i=0
+        c=0
+        while i<len(nums): 
+            if nums[i]==2:
+                c+=1
+            i+=1
+        for i in range(c):
+            nums.remove(2)
+        for i in range(c):
+            nums.append(2)
