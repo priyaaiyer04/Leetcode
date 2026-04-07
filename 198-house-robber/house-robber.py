@@ -4,16 +4,13 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        l=[]
         d={}
-        def fun(i):
+        def dp(i):
             if i>=len(nums):
                 return 0
-            if i in d.keys():
+            if i in d:
                 return d[i]
-            else:
-                d[i]=max(nums[i]+fun(i+2),fun(i+1))
-                return d[i]
-        for i in range(len(nums)):
-            l.append(fun(i))
-        return (max(l))
+            d[i]=max(nums[i]+dp(i+2),dp(i+1))
+            
+            return d[i]
+        return dp(0)
