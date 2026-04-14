@@ -5,19 +5,24 @@ class Solution(object):
         :rtype: List[int]
         """
         p=1
-        g=1
-        for i in nums:
-            if i!=0:
-                g*=i
-        for i in nums:
-            p*=i
         l=[]
-        for i in nums:
-            if i!=0:
-                l.append(p//i)
+        r=[]
+        for i in range(len(nums)):
+            if i==0:
+                l.append(1)
             else:
-                if nums.count(0)>1:
-                    l.append(0)
-                else:
-                    l.append(g)
-        return l
+                p*=nums[i-1]
+                l.append(p)
+            
+        p=1
+        for i in range(len(nums)-1,-1,-1):
+            if i==len(nums)-1:
+                r.append(1)
+            else:
+                p*=nums[i+1]
+                r.append(p)
+        r=r[::-1]    
+        l1=[]
+        for i in range(len(l)):
+            l1.append(l[i]*r[i])
+        return l1
