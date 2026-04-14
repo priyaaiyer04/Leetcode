@@ -5,19 +5,28 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
+        c=0
         l=0
-        if k<=1:
-            return 0
-        c=1
-        count=0
-        for r in range(len(nums)):
-            c=c*nums[r]
-            while c>=k and l<len(nums):
-                c=c//nums[l]
+        r=0
+        p=1
+        g=1
+        for i in nums:
+            g*=i
+        if g<k:
+            return len(nums)*(len(nums)+1)//2
+        while l<len(nums):
+            
+            if (l!=len(nums)-1 and r>=len(nums)) or p>=k:
                 l+=1
-            
-            
-            count+=r-l+1
-        if count<=0:
-            return 0
-        return count
+                r=l
+                p=1
+            elif l==len(nums)-1:
+                p=nums[l]
+                break
+            if r<len(nums):
+                p*=nums[r]
+                if p<k:
+                    c+=1
+               
+            r+=1
+        return c
