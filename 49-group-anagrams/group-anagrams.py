@@ -5,11 +5,12 @@ class Solution(object):
         :rtype: List[List[str]]
         """
         d={}
+        ans=[]
         for i in strs:
-            x=i
-            x=''.join(sorted(x))
-            if x not in d.keys():
-                d[x]=[]
-            d[x].append(i)
-        l=[d[i] for i in d.keys()]
-        return l
+            if ''.join(sorted(i)) not in d:
+                d[''.join(sorted(i))]=[i]
+            else:
+                d[''.join(sorted(i))].append(i)
+        for i in d:
+            ans.append(d[i])
+        return ans
