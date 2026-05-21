@@ -5,17 +5,12 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        
-        left=0
-        right=len( numbers)-1
-        ans=[]
-        while left<right:
-            if  numbers[left]+ numbers[right]<target:
-                left+=1
-            elif  numbers[left]+ numbers[right]>target:
-                right-=1
+        i=0
+        j=len(numbers)-1
+        while i<j:
+            if numbers[i]+numbers[j]==target:
+                return [i+1,j+1]
+            elif numbers[i]+numbers[j]<target:
+                i+=1
             else:
-                ans.append(left+1)
-                ans.append(right+1)
-                break
-        return ans
+                j-=1
