@@ -1,3 +1,9 @@
+#fix -nums[i] and use remaining array like 2 sum
+#target=-1*nums[i]=slicing causes time complexity, dont do slicing, use original list itself
+#left=i+1=avoid duplicates
+#if i>0 and nums[i]==nums[i-1]:
+#                continue =avoid duplicates
+
 class Solution(object):
     def threeSum(self, nums):
         """
