@@ -5,28 +5,28 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        c=0
-        l=0
-        r=0
         p=1
-        g=1
         for i in nums:
-            g*=i
-        if g<k:
-            return len(nums)*(len(nums)+1)//2
-        while l<len(nums):
-            
-            if (l!=len(nums)-1 and r>=len(nums)) or p>=k:
-                l+=1
-                r=l
-                p=1
-            elif l==len(nums)-1:
-                p=nums[l]
-                break
-            if r<len(nums):
+            p*=i
+        if p<k:
+            return (len(nums)+1)*(len(nums))//2
+        l=0
+        ans=0
+        i=0
+        while i<len(nums):
+            r=i+1
+            p=nums[i]
+            if p<k:
+                ans+=1
+        
+            while r< len(nums) :
+                if p>=k:
+                    break
                 p*=nums[r]
-                if p<k:
-                    c+=1
-               
-            r+=1
-        return c
+                r+=1
+                if p>=k:
+                    r-=1
+                    break
+            ans+=r-i-1
+            i+=1 
+        return ans
