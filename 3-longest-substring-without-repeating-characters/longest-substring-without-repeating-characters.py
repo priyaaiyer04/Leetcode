@@ -4,19 +4,28 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
+        ans=0
         l=0
-        l=0
+        r=0
         s1=""
-        c=0
-        while l<len(s):
-            print(s1)
-            if s[l] not in s1:
-                s1+=s[l]
-            else:
-                c=max(c,len(s1))
-                idx=s1.index(s[l])
-                s1=s1[idx+1:]
-                s1+=s[l]
-            l+=1
-        c=max(c,len(s1))
-        return c
+        while l<=r<len(s):
+            if s[r] in s1:
+                
+                ans=max(ans,len(s1))
+                x=l
+                list1=list(s[l:r])
+                list1=list1[::-1]
+                idx=list1.index(s[r])
+                idx=len(list1)-idx+l-1
+                
+                l=idx+1
+                print(idx)
+                s1=s[l:r+1]
+                r+=1
+                
+            elif s[r] not in s1:
+                s1+=s[r]
+                r+=1
+            print(l,r,s1)
+        ans=max(ans,len(s1))
+        return ans
