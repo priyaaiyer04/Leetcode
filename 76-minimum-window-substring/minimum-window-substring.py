@@ -5,41 +5,36 @@ class Solution(object):
         :type t: str
         :rtype: str
         """
-        if len(t)>len(s):
-            return ""
         if t in s:
             return t
-        s1=sorted(s)
-        t1=sorted(t)
-        if t1 in s1:
-            return t
         l=0
-        r=l
-        c=list(t)
-        mins=""
-        s1=""
-        while l<len(s):
+        r=0
+        ans=""
+        l1=list(t)
+        while l<=r<=len(s):
+            if len(l1)==0:
+                if len(s[l:r])<len(ans) or len(ans)==0:
+                    ans=s[l:r]
+                x=l
+                while l<r:
+                    if s[l] in t and t.count(s[l])>s[l+1:r].count(s[l]):
+                        break
+                    elif s[l] not in t:
+                        l+=1
+                    else:
+                        l+=1
             
-            
-            if len(c)==0:
-                if len(s1)<len(mins) or len(mins)==0:
-                    mins=s1
-                if s1[0] in t and t.count(s1[0])>s1[1:].count(s1[0]):
+                if l==x:
+                    l1.append(s[l])
+                    l+=1
+                    while l<r and s[l] not in t:
+                        l+=1
                     
-                    c.append(s[l])
-                l+=1
-                s1=s1[1:]
-            elif r<len(s):
-                s1+=s[r]
-                if s[r] in c:
-                    c.remove(s[r])
-                r+=1
-            elif r==len(s) :
-                if s1[0] in t and t.count(s1[0])>s1[1:].count(s1[0]):
-                    if len(c)==0 and (len(s1)<len(mins) or len(mins)==0):
-                        mins=s1
-                        c.append(s1[0])
-                s1=s1[1:]
-                l+=1
             
-        return (mins)
+            elif r<len(s) and s[r] in l1:
+                l1.remove(s[r])
+                r+=1
+            else:
+                r+=1
+        
+        return  ans
