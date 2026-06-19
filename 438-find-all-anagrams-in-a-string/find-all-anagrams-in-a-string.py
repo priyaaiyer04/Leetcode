@@ -5,39 +5,51 @@ class Solution(object):
         :type p: str
         :rtype: List[int]
         """
+        
+        
         l=0
-        r=l
-        t=p
-        c=list(t)
-        mins=""
-        s1=""
-        l1=[]
-        while l<len(s):
-                    if len(c)==0:
-                        if len(s1)==len(t):
-                                    l1.append(l)
-                        if s1[0] in t and t.count(s1[0])>s1[1:].count(s1[0]):
-                            
-                            c.append(s1[0])
-                        
-                        l+=1
-                        s1=s1[1:]
-                        
-                    elif r<len(s):
-                        s1+=s[r]
-                        if s[r] in c:
-                            c.remove(s[r])
+        r=0
+        l1=list(p)
+        ans=[]
+        while l<=r<len(s):
+            if s[r] in p:
+                x=len(p)+l
+                flag=-1
+                if x>len(s):
+                    x=len(s)
+                while r<x:
+                    if s[r] in l1:
+                        l1.remove(s[r])
                         r+=1
-                        
+                    else:
+                        if s[r] in p and s[r] not in l1:
+                            flag=0
+                        break
+                if len(l1)==0:
                     
-                    elif r==len(s) :
-                        
-                        if s1[0] in t and t.count(s1[0])>s1[1:].count(s1[0]):
-                            if len(c)==0 :
-                                if len(s1)==len(t):
-                                    l1.append(l)
-                                print("hi",c,s1,mins)
-                                c.append(s1[0])
-                        s1=s1[1:]
-                        l+=1
-        return l1
+                    ans.append(l)
+                    l1.append(s[l])
+                    l+=1
+                    if r<l:
+                        r=l
+                        l1=list(p)
+                    
+                elif flag==-1:
+                    
+                    r+=1
+                    l=r
+                    l1=list(p)
+                else:
+                    
+                    l1.append(s[l])
+                    l+=1
+                    if r<l:
+                        r=l
+                        l1=list(p)
+                
+            elif s[r] not in p:
+                
+                r+=1
+                l=r
+                l1=list(p)
+        return ans
