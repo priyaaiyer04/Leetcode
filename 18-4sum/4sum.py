@@ -5,30 +5,31 @@ class Solution(object):
         :type target: int
         :rtype: List[List[int]]
         """
-        if len(nums)<4:
-            return []
-        if len(nums)==4:
-            if sum(nums)==target:
-                return [nums]
-            
         nums.sort()
         ans=[]
-        for i in range(len(nums)-3):
-            r=i+1
-            
-            while r<len(nums)-2:
-                t=target-(nums[i]+nums[r])
-                l1=r+1
-                r1=len(nums)-1
-                while l1<r1:
-                    if nums[l1]+nums[r1]>t:
-                        r1-=1
-                    elif nums[l1]+nums[r1]<t:
-                        l1+=1
-                    else:
-                        if [nums[i],nums[r],nums[l1],nums[r1]] not in ans:
-                            ans.append([nums[i],nums[r],nums[l1],nums[r1]])
-                        l1+=1
-                        r1-=1
-                r+=1
+
+        l=0
+        r=l+1
+        while l<=r<len(nums):
+            c=nums[l]+nums[r]
+            print(c,nums[l],nums[r])
+            c=target-c
+            t=r+1
+            t1=len(nums)-1
+        
+            while t<t1:
+                if nums[t]+nums[t1]<c:
+                    t+=1
+                elif nums[t]+nums[t1]>c:
+                    t1-=1
+                else:
+                    x=[nums[l],nums[r],nums[t],nums[t1]]
+                    if x not in ans:
+                        ans.append(x)
+                    t+=1
+                    t1-=1
+            r+=1
+            if r==len(nums):
+                l+=1
+                r=l+1
         return ans
