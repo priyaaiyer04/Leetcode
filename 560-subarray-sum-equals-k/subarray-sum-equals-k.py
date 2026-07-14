@@ -6,11 +6,15 @@ class Solution(object):
         :rtype: int
         """
         c=0
-        prefix_sum={0:1}
-        ps=0
-        for i in nums:
-            ps+=i
-            if ps-k in prefix_sum:
-                c+=prefix_sum[ps-k]
-            prefix_sum[ps] = prefix_sum.get(ps, 0) + 1
-        return c
+        d={0:1}
+        ans=0
+        for i in range(len(nums)):
+            c+=nums[i]
+            q=c-k
+            if q in d:
+                ans+=d[q]
+            if c in d:
+                d[c]+=1
+            else:
+                d[c]=1
+        return ans
