@@ -10,22 +10,32 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
-        fast=head
         slow=head
-        while slow and fast:
+        fast=head
+        while True:
             if slow:
                 slow=slow.next
             if fast and fast.next:
                 fast=fast.next.next
             if slow==fast:
                 break
-        if slow is None or fast is None:
-            return 
-        mp=fast
+            if slow==None :
+                
+                return slow
+            if fast==None:
+                return fast
         slow=head
-        while (slow!=fast):
+        t=fast
+        while t!=slow:
             slow=slow.next
-            if fast:
-                fast=fast.next
-      
-        return slow
+            t=t.next
+            if t==None or slow==None:
+                
+                return None
+            if t==slow:
+                
+                return t
+        if t==slow:
+            
+            return t
+        return None
