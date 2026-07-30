@@ -6,55 +6,33 @@ class Solution(object):
         :type x: int
         :rtype: List[int]
         """
-        
-        
-        ans1 = float('inf')
-        ans = float('inf')
-
+        if x<=arr[0]:
+            return arr[0:k]
+        if x>=arr[len(arr)-1]:
+            return arr[len(arr)-1-k+1:len(arr)]
+        ans=[]
+        l=[]
         for i in arr:
-            if abs(i - x) < ans:
-                ans1 = i
-                ans = abs(i - x)
-        l = []
-        idx = arr.index(ans1)
-        if idx==0:
-            for i in arr[idx:idx+k]:
-                l.append(i)
-            return l
-        elif idx==len(arr)-1:
-            for i in arr[idx-k+1:idx+1]:
-                l.append(i)
-            return l
-        l.append(arr[idx])
-        if abs(arr[idx-1]-x)<=abs(arr[idx+1]-x) and len(l)<k:
-                l.append(arr[idx-1])
-                c=idx-2
-                d=idx+1
-        elif abs(arr[idx-1]-x)>abs(arr[idx+1]-x) and len(l)<k:
-                l.append(arr[idx+1])
-                c=idx-1
-                d=idx+2
-        else:
-            return l
-       
-        while c>=0 and d<len(arr):
-            if len(l)==k:
-                break
-            elif abs(arr[c]-x)<=abs(arr[d]-x):
-                l.append(arr[c])
-                c-=1
-            else :
-                l.append(arr[d])
-                d+=1
+            l.append(abs(i-x))
+        idx=l.index(min(l))
         
-        if len(l)<k and c>=0:
-            while len(l)<k and c>=0:
-                l.append(arr[c])
-                
-                c-=1
-        if len(l)<k and d<len(arr):
-            while len(l)<k and d<len(arr):
-                l.append(arr[d])
-                d+=1
-        l.sort()
-        return l
+        ans.append(arr[idx])
+        l=idx-1
+        r=idx+1
+        while len(ans)<k and l>=0 and r<len(arr):
+                if  abs(x-arr[l])<=abs(x-arr[r]):
+                    ans.append(arr[l])
+                    l-=1
+                elif abs(x-arr[r])<=abs(x-arr[l]):
+                    ans.append(arr[r])
+                    r+=1
+        if len(ans)<k and l>=0:
+                while len(ans)<k:
+                    ans.append(arr[l])
+                    l-=1
+        if len(ans)<k and r<len(arr):
+                while len(ans)<k:
+                    ans.append(arr[r])
+                    r+=1
+        ans.sort()
+        return ans
