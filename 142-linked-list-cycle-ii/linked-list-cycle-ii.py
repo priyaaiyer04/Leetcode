@@ -12,30 +12,26 @@ class Solution(object):
         """
         slow=head
         fast=head
-        while True:
-            if slow:
+        while fast!=None:
+            if slow and slow.next:
                 slow=slow.next
-            if fast and fast.next:
+            else:
+                slow=None
+            if fast and fast.next and fast.next.next:
                 fast=fast.next.next
+            else:
+                fast=None
             if slow==fast:
                 break
-            if slow==None :
-                
-                return slow
-            if fast==None:
-                return fast
+  
+        if head==fast:
+            return slow
         slow=head
-        t=fast
-        while t!=slow:
+        
+        while slow and fast:
             slow=slow.next
-            t=t.next
-            if t==None or slow==None:
-                
-                return None
-            if t==slow:
-                
-                return t
-        if t==slow:
-            
-            return t
-        return None
+            fast=fast.next
+            if slow==fast:
+                return slow
+      
+
