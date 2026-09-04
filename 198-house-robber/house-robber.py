@@ -5,12 +5,11 @@ class Solution(object):
         :rtype: int
         """
         d={}
-        def dp(i):
-            if i>=len(nums):
+        def dp(n):
+            if n>=len(nums):
                 return 0
-            if i in d:
-                return d[i]
-            d[i]=max(nums[i]+dp(i+2),dp(i+1))
-            
-            return d[i]
+            if n in d:
+                return d[n]
+            d[n]=max(dp(n+1),dp(n+2)+nums[n])
+            return d[n]
         return dp(0)
